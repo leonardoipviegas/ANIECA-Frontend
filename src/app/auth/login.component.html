@@ -1,0 +1,68 @@
+<div id="box-card" class="row justify-content-center">
+  <div class="card">
+    <div class="card-header">
+      Segurança Rodoviária
+    </div>
+    <div class="card-body row">
+      <div class="col-9">
+        <h5 class="card-title">Login</h5>
+        <alert type="danger" *ngIf="this.authService.accountNotFound">
+          Combinação de endereço de email, alvará e password não encontrada.
+        </alert>
+        <form (submit)="onLogin()" [formGroup]="loginForm">
+          <div *ngIf="this.loginType === 'Pessoal'" class="form-group">
+            <label for="email">Endereço Email</label>
+            <input
+              [ngClass]="{ 'is-invalid': this.submitted && f.Email.errors }"
+              type="email"
+              class="form-control"
+              id="email"
+              placeholder="Insira o seu email"
+              formControlName="Email"
+            />
+          </div>
+          <div *ngIf="this.loginType === 'Escolas'" class="form-group">
+            <label for="email">Alvará</label>
+            <input
+              [ngClass]="{ 'is-invalid': this.submitted && f.Permit.errors }"
+              type="number"
+              class="form-control"
+              id="permit"
+              formControlName="Permit"
+              placeholder="Insira o alvará da escola"
+            />
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <show-hide-password btnStyle="info">
+              <input
+                [ngClass]="{
+                  'is-invalid': this.submitted && f.Password.errors
+                }"
+                type="password"
+                class="form-control"
+                id="password"
+                formControlName="Password"
+                placeholder="Insira a sua password"
+              />
+            </show-hide-password>
+          </div>
+          <button type="submit" class="btn btn-outline-success w-100">
+            Entrar
+          </button>
+        </form>
+      </div>
+      <div class="col-3">
+        <tabset [vertical]="true" type="pills" #staticTabs>
+          <tab heading="Pessoal" (selectTab)="onSelect($event)"></tab>
+          <tab heading="Escolas" (selectTab)="onSelect($event)"></tab>
+        </tabset>
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="row justify-content-center">
+        ANIECA @2020
+      </div>
+    </div>
+  </div>
+</div>

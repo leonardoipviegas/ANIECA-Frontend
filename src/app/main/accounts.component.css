@@ -1,0 +1,29 @@
+.disabled {
+  cursor: default;
+}
+h3 {
+  position: absolute;
+  bottom: 0;
+}
+.card-body {
+  padding-top: 2.7%;
+  margin-bottom: -1.2%;
+}
+
+.accountTable {
+  margin-bottom: 3%;
+}
+
+#title {
+  margin-bottom: 2.5%;
+}
+a {
+  color: #007bff;
+  text-decoration: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+a:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}

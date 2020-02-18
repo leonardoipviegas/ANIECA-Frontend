@@ -1,0 +1,179 @@
+<ol class="organizational-chart">
+  <li>
+    <div>
+      <h1>Sinalização</h1>
+    </div>
+    <ol>
+      <li>
+        <div>
+          <button
+            class="btn btn-primary dropdown-toggle"
+            (click)="collapsed[0].self = !collapsed[0].self"
+          >
+            Sinais A.R.T
+          </button>
+        </div>
+        <ol [collapse]="!collapsed[0].self" [isAnimated]="true">
+          <li>
+            <div>
+              <button class="btn btn-warning">Informação</button>
+            </div>
+          </li>
+          <li>
+            <div>
+              <button class="btn btn-warning">Pré-sinalização</button>
+            </div>
+          </li>
+          <li>
+            <div>
+              <button class="btn btn-warning">Direção</button>
+            </div>
+          </li>
+          <li>
+            <div>
+              <button class="btn btn-warning">Confirmação</button>
+            </div>
+          </li>
+          <li>
+            <div>
+              <button class="btn btn-warning">Identif. Localidades</button>
+            </div>
+          </li>
+          <li>
+            <div>
+              <button class="btn btn-warning">Complementares</button>
+            </div>
+          </li>
+          <li>
+            <div>
+              <button class="btn btn-warning">Painéis Adicionais</button>
+            </div>
+          </li>
+        </ol>
+      </li>
+      <li>
+        <div>
+          <button class="btn btn-primary">Sinalização Temporária</button>
+        </div>
+      </li>
+      <li>
+        <div>
+          <button class="btn btn-primary">Mensagem Variável</button>
+        </div>
+      </li>
+      <li>
+        <div>
+          <button class="btn btn-primary">Sinais Luminosos</button>
+        </div>
+      </li>
+      <li>
+        <div>
+          <button
+            class="btn btn-primary dropdown-toggle"
+            (click)="collapsed[4].self = !collapsed[4].self"
+          >
+            Sinais Verticais
+          </button>
+        </div>
+        <ol [collapse]="!collapsed[4].self" [isAnimated]="true">
+          <li>
+            <div>
+              <button class="btn btn-warning">Sinais Indicação</button>
+            </div>
+          </li>
+          <li>
+            <div>
+              <button class="btn btn-warning">Sinais Perigo</button>
+            </div>
+          </li>
+          <li>
+            <div>
+              <button
+                class="btn btn-warning dropdown-toggle"
+                (click)="
+                  collapsed[4].children[2].self = !collapsed[4].children[2].self
+                "
+              >
+                Sinais Regulamentação
+              </button>
+            </div>
+            <ol [collapse]="!collapsed[4].children[2].self" [isAnimated]="true">
+              <li>
+                <div>
+                  <button class="btn btn-success">Cedência de Passagem</button>
+                </div>
+              </li>
+              <li>
+                <div>
+                  <button class="btn btn-success">Proibição</button>
+                </div>
+              </li>
+              <li>
+                <div>
+                  <button class="btn btn-success">Obrigação</button>
+                </div>
+              </li>
+              <li>
+                <div>
+                  <button
+                    class="btn btn-success dropdown-toggle"
+                    (click)="
+                      collapsed[4].children[2].children[3].self = !collapsed[4]
+                        .children[2].children[3].self
+                    "
+                  >
+                    Presc. Especifíca
+                  </button>
+                </div>
+                <ol
+                  [collapse]="!collapsed[4].children[2].children[3].self"
+                  [isAnimated]="true"
+                >
+                  <li>
+                    <div>
+                      <button class="btn btn-danger">Seleção Vias</button>
+                    </div>
+                  </li>
+                  <li>
+                    <div>
+                      <button class="btn btn-danger">Afectação Vias</button>
+                    </div>
+                  </li>
+                  <li>
+                    <div>
+                      <button class="btn btn-danger">Zona</button>
+                    </div>
+                  </li>
+                </ol>
+              </li>
+            </ol>
+          </li>
+          <li>
+            <div>
+              <button class="btn btn-warning">
+                Sinalização Mensagem Variável
+              </button>
+            </div>
+          </li>
+          <li>
+            <div>
+              <button class="btn btn-warning">
+                Sinalização Turístico-cultural
+              </button>
+            </div>
+          </li>
+        </ol>
+      </li>
+      <li>
+        <div>
+          <button class="btn btn-primary">Marcas Rodoviárias</button>
+        </div>
+      </li>
+      <li>
+        <div>
+          <button class="btn btn-primary">Sinais Condutores</button>
+        </div>
+      </li>
+    </ol>
+  </li>
+</ol>

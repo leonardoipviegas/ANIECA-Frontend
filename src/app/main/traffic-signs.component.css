@@ -1,0 +1,14 @@
+.button-center {
+  width: 70%;
+}
+.card-main {
+  height: 20rem;
+}
+
+body {
+  font-family: sans-serif;
+  font-size: 15px;
+}
+.card-body {
+  padding: 3%;
+}

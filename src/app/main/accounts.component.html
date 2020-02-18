@@ -1,0 +1,375 @@
+<div id="title" class="row card-header bg-light shadow-sm">
+  <h4>Gestão de Contas</h4>
+</div>
+<div class="accountTable">
+  <div class="row">
+    <div class="m-auto col-11">
+      <div class="row mb-3">
+        <div class="col-6">
+          <h3>Alunos</h3>
+        </div>
+        <div class="col-6">
+          <button
+            type="button"
+            class="btn btn-primary float-right"
+            tooltip="Criar Aluno"
+            placement="auto"
+            (click)="openModal(createPersonal)"
+          >
+            <fa name="plus" size="1x" inverse="true"></fa>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="card m-auto col-11">
+      <div class="card-body">
+        <table *ngIf="PEOPLE.length !== 0" class="table table-hover table-striped">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Email</th>
+              <th scope="col">Ação</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let personal of people; index as i">
+              <th scope="row">{{ personal.idAccount }}</th>
+              <td>{{ personal.Email }}</td>
+              <td>
+                <button
+                  class="btn btn-danger"
+                  (click)="deleteAccount(personal.idAccount)"
+                >
+                  Eliminar
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="text-center" *ngIf="PEOPLE.length === 0">Alunos não existentes. Crie um aluno <strong><a (click)="openModal(createPersonal)">aqui</a></strong>.</p>
+        <div *ngIf="PEOPLE.length !== 0" class="d-flex justify-content-between p-2">
+          <ngb-pagination
+            [collectionSize]="collectionSize[0]"
+            [(page)]="page[0]"
+            [pageSize]="pageSize[0]"
+          >
+          </ngb-pagination>
+
+          <select
+            class="custom-select"
+            style="width: auto"
+            [(ngModel)]="pageSize[0]"
+          >
+            <option [ngValue]="5">5</option>
+            <option [ngValue]="10">10</option>
+            <option [ngValue]="15">15</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="accountTable">
+  <div class="row">
+    <div class="m-auto col-11">
+      <div class="row mb-3">
+        <div class="col-6">
+          <h3>Escolas</h3>
+        </div>
+        <div class="col-6">
+          <button
+            type="button"
+            class="btn btn-primary float-right"
+            tooltip="Criar Escola"
+            placement="auto"
+            (click)="openModal(createSchool)"
+          >
+            <fa name="plus" size="1x" inverse="true"></fa>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="card m-auto col-11">
+      <div class="card-body">
+        <table *ngIf="SCHOOLS.length !== 0" class="table table-hover table-striped">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Alvará</th>
+              <th scope="col">Ação</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let school of schools; index as i">
+              <th scope="row">{{ school.idAccount }}</th>
+              <td>{{ school.Permit }}</td>
+              <td>
+                <button
+                  class="btn btn-danger"
+                  (click)="deleteAccount(school.idAccount)"
+                >
+                  Eliminar
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="text-center" *ngIf="SCHOOLS.length === 0">Escolas não existentes. Crie uma escola <strong><a (click)="openModal(createSchool)">aqui</a></strong>.</p>
+        <div *ngIf="SCHOOLS.length !== 0" class="d-flex justify-content-between p-2">
+          <ngb-pagination
+            [collectionSize]="collectionSize[1]"
+            [(page)]="page[1]"
+            [pageSize]="pageSize[1]"
+          >
+          </ngb-pagination>
+
+          <select
+            class="custom-select"
+            style="width: auto"
+            [(ngModel)]="pageSize[1]"
+          >
+            <option [ngValue]="5">5</option>
+            <option [ngValue]="10">10</option>
+            <option [ngValue]="15">15</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="accountTable">
+  <div class="row">
+    <div class="m-auto col-11">
+      <div class="row mb-3">
+        <div class="col-6">
+          <h3>Administradores</h3>
+        </div>
+        <div class="col-6">
+          <button
+            type="button"
+            class="btn btn-primary float-right"
+            tooltip="Criar Administrador"
+            placement="auto"
+            (click)="openModal(createAdmin)"
+          >
+            <fa name="plus" size="1x" inverse="true"></fa>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="card m-auto col-11">
+      <div class="card-body">
+        <table class="table table-hover table-striped">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Email</th>
+              <th scope="col">Ação</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let admin of admins; index as i">
+              <th scope="row">{{ admin.idAccount }}</th>
+              <td>{{ admin.Email }}</td>
+              <td>
+                <button
+                  class="btn btn-danger"
+                  (click)="deleteAccount(admin.idAccount)"
+                >
+                  Eliminar
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="d-flex justify-content-between p-2">
+          <ngb-pagination
+            [collectionSize]="collectionSize[2]"
+            [(page)]="page[2]"
+            [pageSize]="pageSize[2]"
+          >
+          </ngb-pagination>
+
+          <select
+            class="custom-select"
+            style="width: auto"
+            [(ngModel)]="pageSize[2]"
+          >
+            <option [ngValue]="5">5</option>
+            <option [ngValue]="10">10</option>
+            <option [ngValue]="15">15</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #createPersonal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Criar Aluno</h4>
+    <button
+      type="button"
+      class="close pull-right"
+      aria-label="Close"
+      (click)="modalRef.hide(); this.authService.accountExists = false"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <alert type="danger" *ngIf="this.authService.accountExists">
+      Conta já existente.
+    </alert>
+    <form (submit)="onCreate(personalForm, 1)" [formGroup]="personalForm">
+      <div class="form-group">
+        <label for="email">Endereço Email</label>
+        <input
+          [ngClass]="{
+            'is-invalid':
+              this.submitted && this.personalForm.controls.Email.errors
+          }"
+          type="email"
+          class="form-control"
+          id="email"
+          placeholder="Insira o seu email"
+          formControlName="Email"
+        />
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <show-hide-password btnStyle="info">
+          <input
+            [ngClass]="{
+              'is-invalid':
+                this.submitted && this.personalForm.controls.Password.errors
+            }"
+            type="password"
+            class="form-control"
+            id="password"
+            formControlName="Password"
+            placeholder="Insira a sua password"
+          />
+        </show-hide-password>
+      </div>
+      <button type="submit" class="btn btn-outline-success w-100">
+        Criar
+      </button>
+    </form>
+  </div>
+</ng-template>
+<ng-template #createSchool>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Criar Escola</h4>
+    <button
+      type="button"
+      class="close pull-right"
+      aria-label="Close"
+      (click)="modalRef.hide(); this.authService.accountExists = false"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <alert type="danger" *ngIf="this.authService.accountExists">
+      Conta já existente.
+    </alert>
+    <form (submit)="onCreate(schoolForm, 2)" [formGroup]="schoolForm">
+      <div class="form-group">
+        <label for="permit">Alvará</label>
+        <input
+          [ngClass]="{
+            'is-invalid':
+              this.submitted && this.schoolForm.controls.Permit.errors
+          }"
+          type="number"
+          class="form-control"
+          id="permit"
+          formControlName="Permit"
+          placeholder="Insira o alvará da escola"
+        />
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <show-hide-password btnStyle="info">
+          <input
+            [ngClass]="{
+              'is-invalid':
+                this.submitted && this.schoolForm.controls.Password.errors
+            }"
+            type="password"
+            class="form-control"
+            id="password"
+            formControlName="Password"
+            placeholder="Insira a sua password"
+          />
+        </show-hide-password>
+      </div>
+      <button type="submit" class="btn btn-outline-success w-100">
+        Criar
+      </button>
+    </form>
+  </div>
+</ng-template>
+<ng-template #createAdmin>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Criar Administrador</h4>
+    <button
+      type="button"
+      class="close pull-right"
+      aria-label="Close"
+      (click)="
+        modalRef.hide();
+        this.authService.accountExists = false;
+        this.adminForm.reset()
+      "
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <alert type="danger" *ngIf="this.authService.accountExists">
+      Conta já existente.
+    </alert>
+    <form (submit)="onCreate(adminForm, 3)" [formGroup]="adminForm">
+      <div class="form-group">
+        <label for="email">Endereço Email</label>
+        <input
+          [ngClass]="{
+            'is-invalid': this.submitted && this.adminForm.controls.Email.errors
+          }"
+          type="email"
+          class="form-control"
+          id="email"
+          placeholder="Insira o seu email"
+          formControlName="Email"
+        />
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <show-hide-password btnStyle="info">
+          <input
+            [ngClass]="{
+              'is-invalid':
+                this.submitted && this.adminForm.controls.Password.errors
+            }"
+            type="password"
+            class="form-control"
+            id="password"
+            formControlName="Password"
+            placeholder="Insira a sua password"
+          />
+        </show-hide-password>
+      </div>
+      <button type="submit" class="btn btn-outline-success w-100">
+        Criar
+      </button>
+    </form>
+  </div>
+</ng-template>
