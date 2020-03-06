@@ -26,20 +26,20 @@
             <li class="dropdown-submenu pull-left dropleft">
               <a class="dropdown-item dropdown-toggle" tabindex="-1">Categorias A e B</a>
               <div class="dropdown-menu">
-                <a class="dropdown-item">Segurança Rodoviária</a>
-                <a class="dropdown-item">Disposições Comuns</a>
-                <a class="dropdown-item">Módulos Teórico Práticos</a>
-                <a class="dropdown-item">Disposições Específicas A</a>
+                <a class="dropdown-item" routerLink="/road-safety-a-b">Segurança Rodoviária</a>
+                <a class="dropdown-item" routerLink="/common-provisions-a-b">Disposições Comuns</a>
+                <a class="dropdown-item" routerLink="/practical-theoretical-modules-a-b">Módulos Teórico Práticos</a>
+                <a class="dropdown-item" routerLink="/specific-provisions-a">Disposições Específicas A</a>
               </div>
             </li>
             <li class="dropdown-submenu pull-left dropleft">
               <a class="dropdown-item dropdown-toggle" tabindex="-1">Categorias C e D</a>
               <div class="dropdown-menu">
-                <a class="dropdown-item">Segurança Rodoviária</a>
-                <a class="dropdown-item">Disposições Comuns</a>
-                <a class="dropdown-item">Disposições específicas C</a>
-                <a class="dropdown-item">Disposições específicas D</a>
-                <a class="dropdown-item">Módulos Teórico Práticos</a>
+                <a class="dropdown-item" routerLink="/road-safety-c-d">Segurança Rodoviária</a>
+                <a class="dropdown-item" routerLink="/common-provisions-c-d">Disposições Comuns</a>
+                <a class="dropdown-item" routerLink="/specific-provisions-c">Disposições específicas C</a>
+                <a class="dropdown-item" routerLink="/specific-provisions-d">Disposições específicas D</a>
+                <a class="dropdown-item" routerLink="/practical-theoretical-modules-c-d">Módulos Teórico Práticos</a>
               </div>
             </li>
           </div>
@@ -59,6 +59,7 @@
           </p>
           <div class="dropdown-menu dropdown-menu-right">
             <a class="dropdown-item" *ngIf="this.authService.getEntity() === 3" routerLink="/accounts">Contas</a>
+            <a class="dropdown-item" *ngIf="this.authService.getEntity() === 3 || this.authService.getEntity() === 2" routerLink="/content">Conteúdos</a>
             <a class="dropdown-item" (click)="this.authService.logout()">Logout</a>
           </div>
         </li>

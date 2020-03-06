@@ -12,3 +12,16 @@ body {
 .card-body {
   padding: 3%;
 }
+.sidenav {
+  margin-bottom: 0;
+}
+.sidenav li {
+  text-decoration: none;
+  display: block;
+}
+.sidenav li button {
+  width: 100%;
+}
+.main-box {
+  height: 17em;
+}

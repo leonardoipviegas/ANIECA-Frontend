@@ -1,0 +1,405 @@
+<nav
+  id="title"
+  class="navbar navbar-expand-lg row card-header bg-light shadow-sm navbar"
+>
+  <div class="col-1"></div>
+  <div class="collapse navbar-collapse">
+    <div class="col-7"></div>
+    <ul class="navbar-nav col-4">
+      <li class="nav-item ml-2 mr-2">
+        <button type="button" class="btn btn-outline-secondary">
+          Sinais
+        </button>
+      </li>
+      <li class="nav-item mr-2">
+        <button type="button" class="btn btn-outline-secondary">
+          Regras
+        </button>
+      </li>
+      <li class="nav-item mr-2">
+        <button type="button" class="btn btn-outline-secondary">
+          Manobras
+        </button>
+      </li>
+      <li class="nav-item mr-2">
+        <button type="button" class="btn btn-outline-secondary">
+          Testes
+        </button>
+      </li>
+    </ul>
+    <ul class="navbar-nav col-1">
+      <li class="nav-item">
+        <button type="button" class="btn btn-outline-danger" routerLink="/">
+          Retroceder
+        </button>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div
+  class="row"
+  style="
+  margin-left: 1rem;
+  margin-right: 1rem;
+  padding-top: 4rem;
+  "
+>
+  <div class="col-2 text-center my-auto">
+    <div class="btn-group" role="group">
+      <button
+        type="button"
+        class="btn btn-warning active"
+        style="
+        white-space: normal;
+        border-radius: 20px"
+      >
+        Disposições Comuns A e B
+      </button>
+    </div>
+  </div>
+  <div
+    class="col-5 text-center my-auto"
+    style="
+    padding-left: 4rem;
+    padding-right: 4rem;
+    "
+  >
+    <div id="disCom" class="btn-group-vertical btn-block" role="group">
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="onClickDispCom($event, 0)"
+        style="
+        margin-bottom: 2rem;
+        white-space: normal;"
+      >
+        Príncipios gerais de trânsito e segurança rodoviária
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="onClickDispCom($event, 1)"
+        style="
+        margin-bottom: 2rem;
+        white-space: normal;"
+      >
+        O condutor e o seu estado físico e psicológico
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="onClickDispCom($event, 2)"
+        style="
+        margin-bottom: 2rem;
+        white-space: normal;"
+      >
+        O condutor e o veículo
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="onClickDispCom($event, 3)"
+        style="
+        margin-bottom: 2rem;
+        white-space: normal;"
+      >
+        O condutor e os outros utentes da via
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="onClickDispCom($event, 4)"
+        style="
+        margin-bottom: 2rem;
+        white-space: normal;"
+      >
+        O condutor, a via e outros fatores externos
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="onClickDispCom($event, 5)"
+        style="white-space: normal;"
+      >
+        Diversos
+      </button>
+    </div>
+  </div>
+  <div
+    class="col-5 text-center my-auto"
+    *ngIf="dispCom[0]"
+    style="
+    padding-left: 4rem;
+    padding-right: 4rem;
+    "
+  >
+    <div class="btn-group-vertical btn-block" role="group">
+      <button
+        type="button"
+        class="btn btn-primary"
+        style="
+        margin-bottom: 2rem;
+        white-space: normal;"
+      >
+        O sistema de circulação
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        style="
+        margin-bottom: 2rem;
+        white-space: normal;"
+      >
+        O acidente
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        style="
+        margin-bottom: 2rem;
+        white-space: normal;"
+      >
+        Função da condução
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        style="
+        margin-bottom: 2rem;
+        white-space: normal;"
+      >
+        Tempo de reação
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        style="
+      margin-bottom: 2rem;
+      white-space: normal;"
+      >
+        Sinalização
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        style="
+        white-space: normal;"
+      >
+        Regras de trânsito e manobras
+      </button>
+    </div>
+  </div>
+  <div
+    class="col-5 text-center my-auto"
+    *ngIf="dispCom[1]"
+    style="
+    padding-left: 4rem;
+    padding-right: 4rem;
+    "
+  >
+    <div class="btn-group-vertical btn-block" role="group">
+      <button
+        type="button"
+        class="btn btn-primary"
+        style="
+        margin-bottom: 2rem;
+        white-space: normal;"
+      >
+        Visão e audição
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        style="
+        margin-bottom: 2rem;
+        white-space: normal;"
+      >
+        Idade
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        style="
+        margin-bottom: 2rem;
+        white-space: normal;"
+      >
+        Estados emocionais
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        style="
+        margin-bottom: 2rem;
+        white-space: normal;"
+      >
+        Fadiga e sonolência
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        style="
+        white-space: normal;"
+      >
+        Álcool, medicamentos e substâncias psicotrópicas
+      </button>
+    </div>
+  </div>
+  <div
+    class="col-5 text-center my-auto"
+    *ngIf="dispCom[2]"
+    style="
+    padding-left: 4rem;
+    padding-right: 4rem;
+    "
+  >
+    <div class="btn-group-vertical btn-block" role="group">
+      <button
+        type="button"
+        class="btn btn-primary"
+        style="
+        margin-bottom: 2rem;
+        white-space: normal;"
+      >
+        Constituintes do veículo
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        style="
+        margin-bottom: 2rem;
+        white-space: normal;"
+      >
+        Inspeções periódicas obrigatórias
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        style="
+        margin-bottom: 2rem;
+        white-space: normal;"
+      >
+        Proteção do ambiente
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        style="
+        margin-bottom: 2rem;
+        white-space: normal;"
+      >
+        Transporte de passageiros e de carga
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        style="
+      margin-bottom: 2rem;
+      white-space: normal;"
+      >
+        Visibilidade relativamente aos outros utentes da via
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        style="
+        white-space: normal;"
+      >
+        Equipamentos de segurança
+      </button>
+    </div>
+  </div>
+  <div
+    class="col-5 text-center my-auto"
+    *ngIf="dispCom[3]"
+    style="
+    padding-left: 4rem;
+    padding-right: 4rem;
+    "
+  >
+    <div class="btn-group-vertical btn-block" role="group">
+      <button
+        type="button"
+        class="btn btn-primary"
+        style="
+        margin-bottom: 2rem;
+        white-space: normal;"
+      >
+        O comportamento a adotar perante os outros utentes
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        style="
+        white-space: normal;"
+      >
+        A condução defensiva
+      </button>
+    </div>
+  </div>
+  <div
+    class="col-5 text-center my-auto"
+    *ngIf="dispCom[4]"
+    style="
+    /* border: 1px solid red; */
+    padding-left: 4rem;
+    padding-right: 4rem;
+    "
+  >
+    <div class="btn-group-vertical btn-block" role="group">
+      <button
+        type="button"
+        class="btn btn-primary"
+        style="
+        margin-bottom: 2rem;
+        white-space: normal;"
+      >
+        Classificação das vias
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        style="
+        white-space: normal;"
+      >
+        Adaptação da condução às condições ambientes e da via
+      </button>
+    </div>
+  </div>
+  <div
+    class="col-5 text-center my-auto"
+    *ngIf="dispCom[5]"
+    style="
+    padding-left: 4rem;
+    padding-right: 4rem;
+    "
+  >
+    <div class="btn-group-vertical btn-block" role="group">
+      <button
+        type="button"
+        class="btn btn-primary"
+        style="
+        margin-bottom: 2rem;
+        white-space: normal;"
+      >
+        Habilitação legal para conduzir
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        style="
+        margin-bottom: 2rem;
+        white-space: normal;"
+      >
+        Responsabilidade
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        style="
+        white-space: normal;"
+      >
+        Comportamento em caso de acidente
+      </button>
+    </div>
+  </div>
+</div>

@@ -16,7 +16,15 @@ import { AccountsComponent } from "./main/accounts.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { TrafficSignsComponent } from "./main/traffic-signs.component";
 import { TreeDiagramComponent } from "./main/tree-diagram/tree-diagram.component";
-
+import { SegRodABComponent } from "./main/app-tree/rod-saf-a-b/rod-saf-a-b.component";
+import { DispComABComponent } from "./main/app-tree/com-prov-a-b/com-prov-a-b.component";
+import { DispEspAComponent } from "./main/app-tree/spec-prov-a/spec-prov-a.component";
+import { ModsTeorPratCDComponent } from "./main/app-tree/prat-theo-mods-c-d/prat-theo-mods-c-d.component";
+import { ModsTeorPratABComponent } from "./main/app-tree/prat-theo-mods-a-b/prat-theo-mods-a-b.component";
+import { SegRodCDComponent } from "./main/app-tree/rod-saf-c-d/rod-saf-c-d.component";
+import { DispComCDComponent } from "./main/app-tree/com-prov-c-d/com-prov-c-d.component";
+import { DispEspCComponent } from "./main/app-tree/spec-prov-c/spec-prov-c.component";
+import { DispEspDComponent } from "./main/app-tree/spec-prov-d/spec-prov-d.component";
 import {
   TooltipModule,
   ModalModule,
@@ -25,6 +33,7 @@ import {
   TabsModule,
   CollapseModule
 } from "ngx-bootstrap";
+import { ContentComponent } from "./main/content.component";
 
 @NgModule({
   declarations: [
@@ -35,7 +44,17 @@ import {
     MainComponent,
     AccountsComponent,
     TrafficSignsComponent,
-    TreeDiagramComponent
+    TreeDiagramComponent,
+    ContentComponent,
+    SegRodABComponent,
+    DispComABComponent,
+    DispEspAComponent,
+    ModsTeorPratCDComponent,
+    ModsTeorPratABComponent,
+    SegRodCDComponent,
+    DispComCDComponent,
+    DispEspCComponent,
+    DispEspDComponent
   ],
   imports: [
     BrowserAnimationsModule,

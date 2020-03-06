@@ -91,7 +91,7 @@ export class AuthService {
             const expiresInDuration = res.expiresIn;
             this.setAuthTimer(expiresInDuration);
             this.isAunthenticated = true;
-            this.idAccount = res.idAccount;
+            this.idAccount = jwt_decode(res.token)._id;
             const now = new Date();
             const expirationDate = new Date(
               now.getTime() + expiresInDuration * 1000
