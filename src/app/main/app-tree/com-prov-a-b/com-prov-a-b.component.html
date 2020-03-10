@@ -1,41 +1,4 @@
-<nav
-  id="title"
-  class="navbar navbar-expand-lg row card-header bg-light shadow-sm navbar"
->
-  <div class="col-1"></div>
-  <div class="collapse navbar-collapse">
-    <div class="col-7"></div>
-    <ul class="navbar-nav col-4">
-      <li class="nav-item ml-2 mr-2">
-        <button type="button" class="btn btn-outline-secondary">
-          Sinais
-        </button>
-      </li>
-      <li class="nav-item mr-2">
-        <button type="button" class="btn btn-outline-secondary">
-          Regras
-        </button>
-      </li>
-      <li class="nav-item mr-2">
-        <button type="button" class="btn btn-outline-secondary">
-          Manobras
-        </button>
-      </li>
-      <li class="nav-item mr-2">
-        <button type="button" class="btn btn-outline-secondary">
-          Testes
-        </button>
-      </li>
-    </ul>
-    <ul class="navbar-nav col-1">
-      <li class="nav-item">
-        <button type="button" class="btn btn-outline-danger" routerLink="/">
-          Retroceder
-        </button>
-      </li>
-    </ul>
-  </div>
-</nav>
+<app-tree-header></app-tree-header>
 <div
   class="row"
   style="
@@ -48,10 +11,10 @@
     <div class="btn-group" role="group">
       <button
         type="button"
-        class="btn btn-warning active"
+        class="btn btn-danger active"
         style="
         white-space: normal;
-        border-radius: 20px"
+        border-radius: 20px;"
       >
         Disposições Comuns A e B
       </button>
@@ -62,64 +25,71 @@
     style="
     padding-left: 4rem;
     padding-right: 4rem;
-    "
+    border-radius: 20px;"
   >
     <div id="disCom" class="btn-group-vertical btn-block" role="group">
       <button
         type="button"
-        class="btn btn-primary"
+        class="btn btn-dark"
         (click)="onClickDispCom($event, 0)"
         style="
         margin-bottom: 2rem;
-        white-space: normal;"
+        white-space: normal;
+        border-radius: 20px"
       >
         Príncipios gerais de trânsito e segurança rodoviária
       </button>
       <button
         type="button"
-        class="btn btn-primary"
+        class="btn btn-dark"
         (click)="onClickDispCom($event, 1)"
         style="
         margin-bottom: 2rem;
-        white-space: normal;"
+        white-space: normal;
+        border-radius: 20px;"
       >
         O condutor e o seu estado físico e psicológico
       </button>
       <button
         type="button"
-        class="btn btn-primary"
+        class="btn btn-dark"
         (click)="onClickDispCom($event, 2)"
         style="
         margin-bottom: 2rem;
-        white-space: normal;"
+        white-space: normal;
+        border-radius: 20px;"
       >
         O condutor e o veículo
       </button>
       <button
         type="button"
-        class="btn btn-primary"
+        class="btn btn-dark"
         (click)="onClickDispCom($event, 3)"
         style="
         margin-bottom: 2rem;
-        white-space: normal;"
+        white-space: normal;
+        border-radius: 20px;"
       >
         O condutor e os outros utentes da via
       </button>
       <button
         type="button"
-        class="btn btn-primary"
+        class="btn btn-dark"
         (click)="onClickDispCom($event, 4)"
         style="
         margin-bottom: 2rem;
-        white-space: normal;"
+        white-space: normal;
+        border-radius: 20px;"
       >
         O condutor, a via e outros fatores externos
       </button>
       <button
         type="button"
-        class="btn btn-primary"
+        class="btn btn-dark"
         (click)="onClickDispCom($event, 5)"
-        style="white-space: normal;"
+        style="
+        white-space: normal;
+        border-radius: 20px;"
       >
         Diversos
       </button>
@@ -136,54 +106,60 @@
     <div class="btn-group-vertical btn-block" role="group">
       <button
         type="button"
-        class="btn btn-primary"
+        class="btn btn-dark"
         style="
         margin-bottom: 2rem;
-        white-space: normal;"
+        white-space: normal;
+        border-radius: 20px;"
       >
         O sistema de circulação
       </button>
       <button
         type="button"
-        class="btn btn-primary"
+        class="btn btn-dark"
         style="
         margin-bottom: 2rem;
-        white-space: normal;"
+        white-space: normal;
+        border-radius: 20px;"
       >
         O acidente
       </button>
       <button
         type="button"
-        class="btn btn-primary"
+        class="btn btn-dark"
         style="
         margin-bottom: 2rem;
-        white-space: normal;"
+        white-space: normal;
+        border-radius: 20px;"
       >
         Função da condução
       </button>
       <button
         type="button"
-        class="btn btn-primary"
+        class="btn btn-dark"
         style="
         margin-bottom: 2rem;
-        white-space: normal;"
+        white-space: normal;
+        border-radius: 20px;"
       >
         Tempo de reação
       </button>
       <button
         type="button"
-        class="btn btn-primary"
+        class="btn btn-dark"
         style="
-      margin-bottom: 2rem;
-      white-space: normal;"
+        margin-bottom: 2rem;
+        white-space: normal;
+        border-radius: 20px;"
       >
         Sinalização
       </button>
       <button
         type="button"
-        class="btn btn-primary"
+        class="btn btn-dark"
         style="
-        white-space: normal;"
+        white-space: normal;
+        border-radius: 20px;"
       >
         Regras de trânsito e manobras
       </button>
@@ -200,45 +176,50 @@
     <div class="btn-group-vertical btn-block" role="group">
       <button
         type="button"
-        class="btn btn-primary"
+        class="btn btn-dark"
         style="
         margin-bottom: 2rem;
-        white-space: normal;"
+        white-space: normal;
+        border-radius: 20px;"
       >
         Visão e audição
       </button>
       <button
         type="button"
-        class="btn btn-primary"
+        class="btn btn-dark"
         style="
         margin-bottom: 2rem;
-        white-space: normal;"
+        white-space: normal;
+        border-radius: 20px;"
       >
         Idade
       </button>
       <button
         type="button"
-        class="btn btn-primary"
+        class="btn btn-dark"
         style="
         margin-bottom: 2rem;
-        white-space: normal;"
+        white-space: normal;
+        border-radius: 20px;"
       >
         Estados emocionais
       </button>
       <button
         type="button"
-        class="btn btn-primary"
+        class="btn btn-dark"
         style="
         margin-bottom: 2rem;
-        white-space: normal;"
+        white-space: normal;
+        border-radius: 20px;"
       >
         Fadiga e sonolência
       </button>
       <button
         type="button"
-        class="btn btn-primary"
+        class="btn btn-dark"
         style="
-        white-space: normal;"
+        white-space: normal;
+        border-radius: 20px;"
       >
         Álcool, medicamentos e substâncias psicotrópicas
       </button>
@@ -255,54 +236,60 @@
     <div class="btn-group-vertical btn-block" role="group">
       <button
         type="button"
-        class="btn btn-primary"
+        class="btn btn-dark"
         style="
         margin-bottom: 2rem;
-        white-space: normal;"
+        white-space: normal;
+        border-radius: 20px;"
       >
         Constituintes do veículo
       </button>
       <button
         type="button"
-        class="btn btn-primary"
+        class="btn btn-dark"
         style="
         margin-bottom: 2rem;
-        white-space: normal;"
+        white-space: normal;
+        border-radius: 20px;"
       >
         Inspeções periódicas obrigatórias
       </button>
       <button
         type="button"
-        class="btn btn-primary"
+        class="btn btn-dark"
         style="
         margin-bottom: 2rem;
-        white-space: normal;"
+        white-space: normal;
+        border-radius: 20px;"
       >
         Proteção do ambiente
       </button>
       <button
         type="button"
-        class="btn btn-primary"
+        class="btn btn-dark"
         style="
         margin-bottom: 2rem;
-        white-space: normal;"
+        white-space: normal;
+        border-radius: 20px;"
       >
         Transporte de passageiros e de carga
       </button>
       <button
         type="button"
-        class="btn btn-primary"
+        class="btn btn-dark"
         style="
-      margin-bottom: 2rem;
-      white-space: normal;"
+        margin-bottom: 2rem;
+        white-space: normal;
+        border-radius: 20px;"
       >
         Visibilidade relativamente aos outros utentes da via
       </button>
       <button
         type="button"
-        class="btn btn-primary"
+        class="btn btn-dark"
         style="
-        white-space: normal;"
+        white-space: normal;
+        border-radius: 20px;"
       >
         Equipamentos de segurança
       </button>
@@ -319,18 +306,20 @@
     <div class="btn-group-vertical btn-block" role="group">
       <button
         type="button"
-        class="btn btn-primary"
+        class="btn btn-dark"
         style="
         margin-bottom: 2rem;
-        white-space: normal;"
+        white-space: normal;
+        border-radius: 20px;"
       >
         O comportamento a adotar perante os outros utentes
       </button>
       <button
         type="button"
-        class="btn btn-primary"
+        class="btn btn-dark"
         style="
-        white-space: normal;"
+        white-space: normal;
+        border-radius: 20px;"
       >
         A condução defensiva
       </button>
@@ -340,7 +329,6 @@
     class="col-5 text-center my-auto"
     *ngIf="dispCom[4]"
     style="
-    /* border: 1px solid red; */
     padding-left: 4rem;
     padding-right: 4rem;
     "
@@ -348,18 +336,20 @@
     <div class="btn-group-vertical btn-block" role="group">
       <button
         type="button"
-        class="btn btn-primary"
+        class="btn btn-dark"
         style="
         margin-bottom: 2rem;
-        white-space: normal;"
+        white-space: normal;
+        border-radius: 20px;"
       >
         Classificação das vias
       </button>
       <button
         type="button"
-        class="btn btn-primary"
+        class="btn btn-dark"
         style="
-        white-space: normal;"
+        white-space: normal;
+        border-radius: 20px;"
       >
         Adaptação da condução às condições ambientes e da via
       </button>
@@ -376,27 +366,30 @@
     <div class="btn-group-vertical btn-block" role="group">
       <button
         type="button"
-        class="btn btn-primary"
+        class="btn btn-dark"
         style="
         margin-bottom: 2rem;
-        white-space: normal;"
+        white-space: normal;
+        border-radius: 20px;"
       >
         Habilitação legal para conduzir
       </button>
       <button
         type="button"
-        class="btn btn-primary"
+        class="btn btn-dark"
         style="
         margin-bottom: 2rem;
-        white-space: normal;"
+        white-space: normal;
+        border-radius: 20px;"
       >
         Responsabilidade
       </button>
       <button
         type="button"
-        class="btn btn-primary"
+        class="btn btn-dark"
         style="
-        white-space: normal;"
+        white-space: normal;
+        border-radius: 20px;"
       >
         Comportamento em caso de acidente
       </button>

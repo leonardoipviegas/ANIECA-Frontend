@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 
 @Component({
-  selector: 'app-seg-rod-a-b',
-  templateUrl: './rod-saf-a-b.component.html',
-  styleUrls: ['./rod-saf-a-b.component.css']
+  selector: 'app-tree-header',
+  templateUrl: './tree-header.component.html',
+  styleUrls: ['./tree-header.component.css']
 })
-export class SegRodABComponent implements OnInit {
+export class TreeHeaderComponent implements OnInit {
 
   constructor(private location: Location) { }
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-mods-teor-prat-a-b',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ModsTeorPratABComponent implements OnInit {
 
-  constructor() { }
+  constructor(private location: Location) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
+  }
+
+  backClicked() {
+    this.location.back();
   }
 
 }

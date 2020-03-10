@@ -31,9 +31,11 @@ import {
   BsDropdownModule,
   AlertModule,
   TabsModule,
-  CollapseModule
+  CollapseModule,
+  AccordionModule
 } from "ngx-bootstrap";
 import { ContentComponent } from "./main/content.component";
+import { TreeHeaderComponent } from './main/app-tree/tree-header/tree-header.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,8 @@ import { ContentComponent } from "./main/content.component";
     SegRodCDComponent,
     DispComCDComponent,
     DispEspCComponent,
-    DispEspDComponent
+    DispEspDComponent,
+    TreeHeaderComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -71,7 +74,8 @@ import { ContentComponent } from "./main/content.component";
     AngularFontAwesomeModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgbModule
+    NgbModule,
+    AccordionModule.forRoot()
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }

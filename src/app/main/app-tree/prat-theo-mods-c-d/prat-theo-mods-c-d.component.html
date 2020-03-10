@@ -1,41 +1,4 @@
-<nav
-  id="title"
-  class="navbar navbar-expand-lg row card-header bg-light shadow-sm navbar"
->
-  <div class="col-1"></div>
-  <div class="collapse navbar-collapse">
-    <div class="col-7"></div>
-    <ul class="navbar-nav col-4">
-      <li class="nav-item ml-2 mr-2">
-        <button type="button" class="btn btn-outline-secondary">
-          Sinais
-        </button>
-      </li>
-      <li class="nav-item mr-2">
-        <button type="button" class="btn btn-outline-secondary">
-          Regras
-        </button>
-      </li>
-      <li class="nav-item mr-2">
-        <button type="button" class="btn btn-outline-secondary">
-          Manobras
-        </button>
-      </li>
-      <li class="nav-item mr-2">
-        <button type="button" class="btn btn-outline-secondary">
-          Testes
-        </button>
-      </li>
-    </ul>
-    <ul class="navbar-nav col-1">
-      <li class="nav-item">
-        <button type="button" class="btn btn-outline-danger" routerLink="/">
-          Retroceder
-        </button>
-      </li>
-    </ul>
-  </div>
-</nav>
+<app-tree-header></app-tree-header>
 <div
   class="row"
   style="
@@ -44,16 +7,11 @@
   padding-top: 6rem;
   "
 >
-  <div
-    class="col-3 text-center my-auto"
-    style="
-    /* border: 1px solid red; */
-    "
-  >
+  <div class="col-3 text-center my-auto">
     <div class="btn-group" role="group">
       <button
         type="button"
-        class="btn btn-warning active"
+        class="btn btn-danger active"
         style="
         white-space: normal;
         border-radius: 20px"
@@ -71,36 +29,40 @@
     >
       <button
         type="button"
-        class="btn btn-primary"
+        class="btn btn-dark"
         style="
         margin-bottom: 2rem;
-        white-space: normal;"
+        white-space: normal;
+        border-radius: 20px;"
       >
         Perceção do risco I
       </button>
       <button
         type="button"
-        class="btn btn-primary"
+        class="btn btn-dark"
         style="
         margin-bottom: 2rem;
-        white-space: normal;"
+        white-space: normal;
+        border-radius: 20px;"
       >
         Perceção do risco II
       </button>
       <button
         type="button"
-        class="btn btn-primary"
+        class="btn btn-dark"
         style="
         margin-bottom: 2rem;
-        white-space: normal;"
+        white-space: normal;
+        border-radius: 20px;"
       >
         Distração na condução
       </button>
       <button
         type="button"
-        class="btn btn-primary"
+        class="btn btn-dark"
         style="
-        white-space: normal;"
+        white-space: normal;
+        border-radius: 20px;"
       >
         Eco-Condução
       </button>

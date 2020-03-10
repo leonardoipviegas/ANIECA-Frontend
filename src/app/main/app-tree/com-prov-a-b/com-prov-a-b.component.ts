@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-disp-com-a-b',
@@ -15,16 +16,20 @@ export class DispComABComponent implements OnInit {
     false
   ];
 
-  constructor() { }
+  constructor(private location: Location) { }
 
   ngOnInit(): void {
+  }
+
+  backClicked() {
+    this.location.back();
   }
 
   onClickDispCom(event: any, option: number) {
     const actives = document.getElementById('disCom').getElementsByClassName('active');
 
     for (let i = 0; i < actives.length; i++) {
-      actives[i].className = actives[i].className.replace('btn-warning', 'btn-primary');
+      actives[i].className = actives[i].className.replace('btn-danger', 'btn-dark');
       actives[i].className = actives[i].className.replace(' active', '');
     }
 
@@ -33,7 +38,7 @@ export class DispComABComponent implements OnInit {
         this.dispCom[i] = !this.dispCom[i];
 
         if (this.dispCom[i]) {
-          event.target.className = 'btn btn-warning active';
+          event.target.className = 'btn btn-danger active';
         }
       } else {
         this.dispCom[i] = false;
