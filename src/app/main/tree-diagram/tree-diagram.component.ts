@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { TrafficSignsService } from './../traffic-signs.service';
 
 @Component({
   selector: "app-tree-diagram",
@@ -116,6 +117,11 @@ export class TreeDiagramComponent implements OnInit {
       children: []
     }
   ]
-  
+  constructor(private trafficSignsService: TrafficSignsService) {}
+
   ngOnInit() {}
+
+  goTo(signalId: number) {
+    this.trafficSignsService.goToSignType(signalId);
+  }
 }

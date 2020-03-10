@@ -43,47 +43,110 @@
 </nav>
 <div class="row mt-5 mb-5">
   <div class="col-11 m-auto">
-    <!-- <div class="card">
+    <div class="card" *ngIf="activeDiagram">
       <div class="card-header">Diagrama Sinalização</div>
       <div class="card-body p-5">
         <app-tree-diagram></app-tree-diagram>
       </div>
       <div class="card-footer text-center">Página Inicial</div>
-    </div> -->
-    <div class="card">
-      <div class="card-header">Sinais Perigo</div>
+    </div>
+    <div class="card" *ngIf="!activeDiagram">
+      <div class="card-header">{{ typeTitle }}</div>
       <div class="card-body pr-5 pl-5">
         <div class="row">
           <div class="col-10 m-auto">
             <div class="row main-box">
-              <p class="mr-5 ml-5 mt-auto mb-auto" align="center">
-                Indicam a existência ou a possibilidade de aparecimento de
-                situações perigosas para o trânsito que imponham especial
-                atenção e prudência.
-              </p>
+              <div
+                *ngIf="this.pageNumber === 0"
+                class="mr-5 ml-5 mt-auto mb-auto"
+              >
+                <p align="center">
+                  {{ typeDescription }}
+                </p>
+              </div>
+              <div *ngIf="this.pageNumber === 1" class="mr-auto ml-auto h-100">
+                <img
+                  class="c-p rounded-lg"
+                  src="{{ typePlacementImageRoute }}"
+                  id="pla-photo"
+                  (click)="typePlacementTextActive = !typePlacementTextActive"
+                />
+                <div
+                  id="textPlacement"
+                  class="mr-auto ml-auto mt-3"
+                  *ngIf="typePlacementTextActive"
+                >
+                  <p align="center">{{ typePlacementText }}</p>
+                </div>
+              </div>
+              <div *ngIf="this.pageNumber === 2" class="mr-auto ml-auto h-100">
+                <div *ngFor="let sign of signsImage; let i = index" class="d-inline">
+                  <div (click)="getSign(sign.idTraffic_Signs)" class="d-inline">
+                    <hr *ngIf="i % 6 === 0">
+                    <img width="12%" src="{{ sign.Image_Route }}" class="c-p ml-2 mr-2"/>
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="row">
               <div class="col-6">
-                <a href="" class="text-dark ml-5"><fa name="play-circle" rotate="horizontal" size="3x"></fa></a>
+                <a
+                  (click)="changePage()"
+                  class="ml-5 inv"
+                  [ngClass]="{
+                    'c-p': this.pageNumber !== 2,
+                    'text-dark': this.pageNumber !== 2,
+                    'text-muted': this.pageNumber === 2
+                  }"
+                  ><fa name="play-circle" rotate="horizontal" size="3x"></fa
+                ></a>
               </div>
               <div class="col-6">
-                <a href="" class="float-right text-dark mr-5"><fa name="play-circle" size="3x"></fa></a>
+                <a
+                  (click)="changePage()"
+                  class="float-right mr-5 inv"
+                  [ngClass]="{
+                    'c-p': this.pageNumber !== 2,
+                    'text-dark': this.pageNumber !== 2,
+                    'text-muted': this.pageNumber === 2
+                  }"
+                  ><fa name="play-circle" size="3x"></fa
+                ></a>
               </div>
             </div>
           </div>
           <div class="col-2">
             <ul class="sidenav">
-              <li>
-                <button class="btn btn-outline-secondary">Colocação</button>
+              <li class="mb-5">
+                <button class="btn btn-outline-danger" (click)="goToDiagram()">
+                  Retroceder
+                </button>
               </li>
               <li class="mt-2">
-                <button class="btn btn-outline-secondary">Outro</button>
-              </li>
-              <li class="mt-5">
-                <button class="btn btn-outline-secondary">Exemplos</button>
+                <button
+                  class="btn"
+                  (click)="this.pageNumber = 0"
+                  [ngClass]="{
+                    'btn-secondary':
+                      this.pageNumber === 0 || this.pageNumber === 1,
+                    'btn-outline-secondary':
+                      this.pageNumber !== 0 && this.pageNumber !== 1
+                  }"
+                >
+                  Regras Gerais
+                </button>
               </li>
               <li class="mt-2">
-                <button class="btn btn-outline-danger">Sair</button>
+                <button
+                  class="btn"
+                  (click)="this.pageNumber = 2; getSignsImage()"
+                  [ngClass]="{
+                    'btn-secondary': this.pageNumber === 2,
+                    'btn-outline-secondary': this.pageNumber !== 2
+                  }"
+                >
+                  Sinais
+                </button>
               </li>
               <li class="mt-5">
                 <button class="btn btn-outline-success">Teste Temático</button>
@@ -96,3 +159,89 @@
     </div>
   </div>
 </div>
+
+<ng-template #sign>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">{{ typeTitle }}</h4>
+    <button
+      type="button"
+      class="close pull-right"
+      aria-label="Close"
+      (click)="modalRef.hide()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-10">
+        <div class="text-center">
+          <img
+            src="{{ signInformation.Image_Route }}"
+            *ngIf="exNum === 0"
+            class="mb-2 rounded"
+          />
+          <img
+            src="{{ signInformation.Example_1_Image_Route }}"
+            class="mb-2 rounded"
+            *ngIf="exNum === 1"
+          />
+          <img
+            src="{{ signInformation.Example_2_Image_Route }}"
+            class="mb-2 rounded"
+            *ngIf="exNum === 2"
+          />
+          <img
+            src="{{ signInformation.Example_3_Image_Route }}"
+            class="mb-2 rounded"
+            *ngIf="exNum === 3"
+          />
+        </div>
+        <hr />
+        <h5 align="center">{{ signInformation.Name }}</h5>
+        <p align="center">{{ signInformation.Text }}</p>
+      </div>
+      <div class="col-2">
+        <div class="row mb-3">
+          <button
+            type="button"
+            class="btn"
+            [ngClass]="{
+              'btn-secondary': this.exNum === 1,
+              'btn-outline-secondary': this.exNum !== 1
+            }"
+            (click)="changeExNum(1)"
+          >
+            Exemplo 1
+          </button>
+        </div>
+        <div class="row mb-3">
+          <button
+            type="button"
+            class="btn"
+            [ngClass]="{
+              'btn-secondary': this.exNum === 2,
+              'btn-outline-secondary': this.exNum !== 2
+            }"
+            (click)="changeExNum(2)"
+          >
+            Exemplo 2
+          </button>
+        </div>
+        <div class="row mb-3">
+          <button
+            type="button"
+            class="btn"
+            [ngClass]="{
+              'btn-secondary': this.exNum === 3,
+              'btn-outline-secondary': this.exNum !== 3
+            }"
+            (click)="changeExNum(3)"
+          >
+            Exemplo 3
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

@@ -23,5 +23,21 @@ body {
   width: 100%;
 }
 .main-box {
-  height: 17em;
+  height: 18em;
+}
+.c-p {
+  cursor: pointer;
+}
+.inv {
+  background: transparent;
+  border: none !important;
+}
+#pla-photo {
+  height: 80%;
+}
+#textPlacement {
+  width: 80%;
+}
+.text-center img {
+  height: 15em;
 }
