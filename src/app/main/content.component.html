@@ -1,18 +1,123 @@
-<div class="row mt-5 mb-5">
-  <div class="col-11 m-auto">
-    <div class="card">
-      <div class="card-header">Sinais Perigo</div>
-      <div class="card-body pr-5 pl-5">
-        <div class="row">
-          <div class="col-4">
-
+<div id="title" class="row card-header bg-light shadow-sm">
+  <h4>Gestão de Conteúdos</h4>
+</div>
+<div class="row mt-3 mb-5">
+  <div class="col-3">
+    <accordion [isAnimated]="true" [closeOthers]="true">
+      <accordion-group #sinalization heading="Sinalização">
+        <accordion [isAnimated]="true" [closeOthers]="true">
+          <div class="panel card panel-default">
+            <div class="panel-heading card-header panel-enabled">
+              <button class="btn btn-link" (click)="getSignType(1)">Sinais de Perigo</button>
+            </div>
           </div>
-          <div class="col-8">
-            
+        </accordion>
+      </accordion-group>
+    </accordion>
+  </div>
+  <div class="col-9">
+    <div class="card">
+      <div class="card-header">{{ title }}</div>
+      <div class="card-body pr-5 pl-5">
+        <!-- Sign Type -->
+        <div class="row">
+          <div class="col-9"></div>
+          <div class="col-3">
+            <div class="ml-5">
+              <button
+                type="button"
+                class="btn btn-primary btn-sm mr-1"
+                (click)="
+                  openModal(editSignType);
+                  this.editSignTypeForm.controls['Name'].setValue(
+                    this.data.Name
+                  );
+                  this.editSignTypeForm.controls['Text'].setValue(
+                    this.data.Text
+                  );
+                  this.editSignTypeForm.controls['Placement_Text'].setValue(
+                    this.data.Placement_Text
+                  )
+                "
+              >
+                <fa name="plus"></fa> Editar
+              </button>
+              <button type="button" class="btn btn-success btn-sm">
+                <fa name="plus"></fa> Sinais
+              </button>
+            </div>
+          </div>
+          <div class="col-11 m-auto">
+            <p class="w-100 mt-3"><b>Nome: </b>{{ data.Name }}</p>
+            <p class="w-100"><b>Texto: </b>{{ data.Text }}</p>
+            <p class="w-100">
+              <b>Texto de Colocação: </b>{{ data.Placement_Text }}
+            </p>
+            <p class="w-100"><b>Imagem de Colocação: </b></p>
+            <img
+              class="mb-3 rounded"
+              width="40%"
+              src="{{ data.Placement_Image_Route }}"
+            />
           </div>
         </div>
       </div>
-      <div class="card-footer text-center">Sinalização</div>
     </div>
   </div>
 </div>
+
+<ng-template #editSignType>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Editar Tipo de Sinal</h4>
+    <button
+      type="button"
+      class="close pull-right"
+      aria-label="Close"
+      (click)="modalRef.hide()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form
+      [formGroup]="editSignTypeForm"
+      (submit)="editSignTypeF(this.editSignTypeForm.value)"
+    >
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">Nome</span>
+        </div>
+        <input
+          formControlName="Name"
+          type="text"
+          class="form-control"
+          placeholder="Nome do Tipo de Sinal"
+        />
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Texto</span>
+        </div>
+        <textarea
+          formControlName="Text"
+          class="form-control"
+          placeholder="Texto"
+        ></textarea>
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Texto de Colocação</span>
+        </div>
+        <textarea
+          formControlName="Placement_Text"
+          class="form-control"
+          placeholder="Texto de Colocação"
+        ></textarea>
+      </div>
+      <input type="file" class="mb-3" />
+      <div class="w-100">
+        <button class="btn btn-primary w-100" type="submit">Guardar</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
