@@ -8,7 +8,9 @@
         <accordion [isAnimated]="true" [closeOthers]="true">
           <div class="panel card panel-default">
             <div class="panel-heading card-header panel-enabled">
-              <button class="btn btn-link" (click)="getSignType(1)">Sinais de Perigo</button>
+              <button class="btn btn-link" (click)="getSignType(1)">
+                Sinais de Perigo
+              </button>
             </div>
           </div>
         </accordion>
@@ -28,7 +30,7 @@
                 type="button"
                 class="btn btn-primary btn-sm mr-1"
                 (click)="
-                  openModal(editSignType);
+                  openModal(editSignType, 'modal-md');
                   this.editSignTypeForm.controls['Name'].setValue(
                     this.data.Name
                   );
@@ -42,7 +44,14 @@
               >
                 <fa name="plus"></fa> Editar
               </button>
-              <button type="button" class="btn btn-success btn-sm">
+              <button
+                type="button"
+                class="btn btn-success btn-sm"
+                (click)="
+                  getSigns(this.data['idTraffic_Signs_Type']);
+                  openModal(signsModal, 'modal-lg')
+                "
+              >
                 <fa name="plus"></fa> Sinais
               </button>
             </div>
@@ -119,5 +128,103 @@
         <button class="btn btn-primary w-100" type="submit">Guardar</button>
       </div>
     </form>
+  </div>
+</ng-template>
+
+<ng-template #signsModal>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">{{ title }}</h4>
+    <button
+      type="button"
+      class="close pull-right"
+      aria-label="Close"
+      (click)="modalRef.hide()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-9"></div>
+      <div class="col-3">
+        <button
+          type="button"
+          class="btn btn-success ml-4"
+          (click)="openModal(signInfo, 'modal-lg')"
+        >
+          <fa name="plus" inverse="true"></fa>
+          Adicionar
+        </button>
+      </div>
+    </div>
+
+    <hr />
+
+    <div class="row p-3">
+      <div class="col-4 mb-3" *ngFor="let sign of signs">
+        <div class="card">
+          <div class="card-body text-center">
+            <img src="{{ sign.Image_Route }}" width="80%" />
+            <button
+              type="button"
+              class="btn btn-outline-primary mt-4"
+              (click)="getSign(sign.idTraffic_Signs)"
+            >
+              {{ sign.Name }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #signInfo>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">{{ signInformation.Name }}</h4>
+    <button
+      type="button"
+      class="close pull-right"
+      aria-label="Close"
+      (click)="modalRef.hide()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row ml-2 mr-2">
+      <div class="container">
+        <p>
+          <b>Nome:</b>
+          {{ signInformation.Name }}
+        </p>
+        <p>
+          <b>Texto:</b>
+          {{ signInformation.Text }}
+        </p>
+        <p>
+          <b>Imagem:</b>
+        </p>
+        <img src="{{ signInformation.Image_Route }}" />
+      </div>
+    </div>
+  </div>
+  <div class="row mb-4">
+    <hr>
+    <div class="col-6"></div>
+    <div class="col-6">
+      <button
+        type="button"
+        class="btn btn-primary mr-1"
+        (click)="openModal(template)"
+      >
+        <fa name="edit" inverse="true"></fa>
+        Editar
+      </button>
+      <button class="btn btn-danger ml-1" (click)="deleteSign()">
+        <fa name="trash" inverse="true"></fa>
+        Eliminar
+      </button>
+    </div>
   </div>
 </ng-template>

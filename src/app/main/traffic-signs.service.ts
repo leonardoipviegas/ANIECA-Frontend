@@ -80,4 +80,18 @@ export class TrafficSignsService {
         err => console.log(err)
       );
   }
+
+  deleteTrafficSign(idTraffic_Signs: number) {
+    this.http
+      .delete(
+        environment.apiUrl +
+          "/content/traffic-signs/sign/?idTraffic_Signs=" +
+          idTraffic_Signs,
+        { headers: this.headers }
+      )
+      .subscribe(
+        res => console.log(res),
+        err => console.log(err)
+      );
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from "@angular/core";
+import { Component, OnInit, TemplateRef, ViewChild } from "@angular/core";
 import { AuthService } from "./../auth/auth.service";
 import { TrafficSignsService } from "./traffic-signs.service";
 import { BsModalService, BsModalRef } from "ngx-bootstrap";
@@ -18,6 +18,9 @@ export class ContentComponent implements OnInit {
   data = {};
   modalRef: BsModalRef;
   editSignTypeForm: FormGroup;
+  signs = [];
+  signInformation = [];
+  @ViewChild("signInfo", { static: false }) signInfo: any;
 
   onImagePicked(event: Event) {
     const file = (event.target as HTMLInputElement).files[0];
@@ -45,13 +48,12 @@ export class ContentComponent implements OnInit {
       }
 
       this.data = res;
-      console.log(this.data);
       this.title = res.Name;
     });
   }
 
-  openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template);
+  openModal(template: TemplateRef<any>, size) {
+    this.modalRef = this.modalService.show(template, { class: size });
   }
 
   editSignTypeF(data) {
@@ -61,8 +63,38 @@ export class ContentComponent implements OnInit {
       if (this.data[signTypeField] === data[signTypeField])
         delete data[signTypeField];
     });
-    
-    this.trafficSignsService.patchSignType(this.data['idTraffic_Signs_Type'], data)
+
+    this.trafficSignsService.patchSignType(
+      this.data["idTraffic_Signs_Type"],
+      data
+    );
+    window.location.reload();
+  }
+
+  getSigns(idTraffic_Signs_Type: number) {
+    this.trafficSignsService.getSignsImage(idTraffic_Signs_Type, (err, res) => {
+      if (err) {
+        return console.log(err);
+      }
+      this.signs = res;
+    });
+  }
+
+  getSign(idTraffic_Signs: number) {
+    this.trafficSignsService.getSign(idTraffic_Signs, (err, res) => {
+      if (err) {
+        return console.log(err);
+      }
+      this.signInformation = res[0];
+      this.openModal(this.signInfo, "modal-md");
+    });
+  }
+
+  deleteSign() {
+    console.log('ok')
+    this.trafficSignsService.deleteTrafficSign(
+      this.signInformation["idTraffic_Signs"]
+    );
     window.location.reload();
   }
 }
