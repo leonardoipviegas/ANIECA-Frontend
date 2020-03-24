@@ -20,6 +20,9 @@ export class ContentComponent implements OnInit {
   editSignTypeForm: FormGroup;
   signs = [];
   signInformation = [];
+  openContent = 0;
+  signForm: FormGroup;
+  signName: string;
   @ViewChild("signInfo", { static: false }) signInfo: any;
 
   onImagePicked(event: Event) {
@@ -35,6 +38,11 @@ export class ContentComponent implements OnInit {
 
   ngOnInit() {
     this.editSignTypeForm = new FormGroup({
+      Name: new FormControl(null),
+      Text: new FormControl(null),
+      Placement_Text: new FormControl(null)
+    });
+    this.signForm = new FormGroup({
       Name: new FormControl(null),
       Text: new FormControl(null),
       Placement_Text: new FormControl(null)
@@ -71,6 +79,36 @@ export class ContentComponent implements OnInit {
     window.location.reload();
   }
 
+  signF(data) {
+    var SignFields = ["Name", "Text"];
+
+    if (this.signInformation.length === 0) {
+      data['Traffic_Signs_Type_idTraffic_Signs_Type'] = this.data["idTraffic_Signs_Type"]
+      this.trafficSignsService.postSign(data, (error) => {
+        if (error) {
+          return console.log(error)
+        }
+        this.getSigns(this.data["idTraffic_Signs_Type"]);
+      });
+    } else {
+      SignFields.forEach(SignField => {
+        if (this.signInformation[SignField] === data[SignField])
+          delete data[SignField];
+      });
+
+      this.trafficSignsService.patchSign(
+        this.signInformation["idTraffic_Signs"],
+        data
+      );
+    }
+  }
+
+  addSign() {
+    this.signInformation = [];
+    this.signName = "Adicionar Sinal";
+    this.signForm.reset();
+  }
+
   getSigns(idTraffic_Signs_Type: number) {
     this.trafficSignsService.getSignsImage(idTraffic_Signs_Type, (err, res) => {
       if (err) {
@@ -86,15 +124,20 @@ export class ContentComponent implements OnInit {
         return console.log(err);
       }
       this.signInformation = res[0];
+      this.signForm.controls["Name"].setValue(this.signInformation["Name"]);
+      this.signForm.controls["Text"].setValue(this.signInformation["Text"]);
+      this.signName = this.signInformation["Name"];
       this.openModal(this.signInfo, "modal-md");
     });
   }
 
-  deleteSign() {
-    console.log('ok')
-    this.trafficSignsService.deleteTrafficSign(
-      this.signInformation["idTraffic_Signs"]
-    );
-    window.location.reload();
+  deleteSign(idTraffic_Signs: number) {
+    this.trafficSignsService.deleteTrafficSign(idTraffic_Signs, (error) => {
+      if (error) {
+        return console.log(error)
+      }
+
+      this.getSigns(this.data["idTraffic_Signs_Type"]);
+    });
   }
 }

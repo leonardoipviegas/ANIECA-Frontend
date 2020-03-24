@@ -66,6 +66,18 @@ export class TrafficSignsService {
         err => cb(err)
       );
   }
+
+  postSign(data, cb) {
+    this.http
+      .post(environment.apiUrl + "/content/traffic-signs/sign/", data, {
+        headers: this.headers
+      })
+      .subscribe(
+        res => cb(null, res),
+        err => cb(err)
+      );
+  }
+
   patchSignType(idTraffic_Signs_Type: number, data) {
     this.http
       .patch(
@@ -81,7 +93,22 @@ export class TrafficSignsService {
       );
   }
 
-  deleteTrafficSign(idTraffic_Signs: number) {
+  patchSign(idTraffic_Signs: number, data) {
+    this.http
+      .patch(
+        environment.apiUrl +
+          "/content/traffic-signs/sign/?idTraffic_Signs=" +
+          idTraffic_Signs,
+        data,
+        { headers: this.headers }
+      )
+      .subscribe(
+        res => console.log(res),
+        err => console.log(err)
+      );
+  }
+
+  deleteTrafficSign(idTraffic_Signs: number, cb) {
     this.http
       .delete(
         environment.apiUrl +
@@ -90,8 +117,8 @@ export class TrafficSignsService {
         { headers: this.headers }
       )
       .subscribe(
-        res => console.log(res),
-        err => console.log(err)
+        res => cb(null, res),
+        err => cb(err)
       );
   }
 }

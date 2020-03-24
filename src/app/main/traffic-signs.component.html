@@ -5,7 +5,7 @@
   <h4>Sinalização</h4>
   <div class="collapse navbar-collapse">
     <div class="col-4"></div>
-    <ul class="navbar-nav col-5">
+    <ul class="navbar-nav col-5" *ngIf="this.activeDiagram === true">
       <li class="nav-item ml-2 mr-2">
         <button type="button" class="btn btn-outline-secondary">
           Hierarquia
@@ -27,7 +27,7 @@
         </button>
       </li>
     </ul>
-    <ul class="navbar-nav col-3">
+    <ul class="navbar-nav col-3" *ngIf="this.activeDiagram === true">
       <li class="nav-item mr-2">
         <button type="button" class="btn btn-outline-danger">
           Sair
@@ -175,29 +175,45 @@
   <div class="modal-body">
     <div class="row">
       <div class="col-10">
-        <div class="text-center">
+        <div class="text-center" style="height: 15rem;">
           <img
-            src="{{ signInformation.Image_Route }}"
-            *ngIf="exNum === 0"
-            class="mb-2 rounded"
-          />
+          src="{{ this.signInformation.Image_Route }}"
+          *ngIf="!showExamples"
+          class="mb-2 rounded"
+        />
           <img
-            src="{{ signInformation.Example_1_Image_Route }}"
+            src="{{ this.signInformation['Examples'][this.exNum].Example_Image_Route }}"
+            *ngIf="showExamples"
             class="mb-2 rounded"
-            *ngIf="exNum === 1"
-          />
-          <img
-            src="{{ signInformation.Example_2_Image_Route }}"
-            class="mb-2 rounded"
-            *ngIf="exNum === 2"
-          />
-          <img
-            src="{{ signInformation.Example_3_Image_Route }}"
-            class="mb-2 rounded"
-            *ngIf="exNum === 3"
           />
         </div>
         <hr />
+        <div class="row" *ngIf="showExamples">
+          <div class="col-6">
+            <a
+              (click)="changeExample(-1)"
+              class="ml-5 inv"
+              [ngClass]="{
+                'c-p': this.exNum.length !== 1,
+                'text-dark': this.exNum.length !== 1,
+                'text-muted': this.exNum.length === 1
+              }"
+              ><fa name="play-circle" rotate="horizontal" size="3x"></fa
+            ></a>
+          </div>
+          <div class="col-6">
+            <a
+              (click)="changeExample(1)"
+              class="float-right mr-5 inv"
+              [ngClass]="{
+                'c-p': this.exNum.length !== 1,
+                'text-dark': this.exNum.length !== 1,
+                'text-muted': this.exNum.length === 1
+              }"
+              ><fa name="play-circle" size="3x"></fa
+            ></a>
+          </div>
+        </div>
         <h5 align="center">{{ signInformation.Name }}</h5>
         <p align="center">{{ signInformation.Text }}</p>
       </div>
@@ -207,38 +223,12 @@
             type="button"
             class="btn"
             [ngClass]="{
-              'btn-secondary': this.exNum === 1,
-              'btn-outline-secondary': this.exNum !== 1
+              'btn-secondary': showExamples,
+              'btn-outline-secondary': !showExamples
             }"
-            (click)="changeExNum(1)"
+            (click)="showExamples = !showExamples"
           >
-            Exemplo 1
-          </button>
-        </div>
-        <div class="row mb-3">
-          <button
-            type="button"
-            class="btn"
-            [ngClass]="{
-              'btn-secondary': this.exNum === 2,
-              'btn-outline-secondary': this.exNum !== 2
-            }"
-            (click)="changeExNum(2)"
-          >
-            Exemplo 2
-          </button>
-        </div>
-        <div class="row mb-3">
-          <button
-            type="button"
-            class="btn"
-            [ngClass]="{
-              'btn-secondary': this.exNum === 3,
-              'btn-outline-secondary': this.exNum !== 3
-            }"
-            (click)="changeExNum(3)"
-          >
-            Exemplo 3
+            Exemplos
           </button>
         </div>
       </div>

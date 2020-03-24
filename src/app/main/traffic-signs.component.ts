@@ -12,6 +12,7 @@ export class TrafficSignsComponent implements OnInit {
     private trafficSignsService: TrafficSignsService,
     private modalService: BsModalService
   ) {}
+  showExamples = false;
   exNum = 0;
   activeDiagram = true;
   typeTitle = "";
@@ -23,7 +24,7 @@ export class TrafficSignsComponent implements OnInit {
   signsImage = [];
   pageNumber = 0;
   modalRef: BsModalRef | null;
-  @ViewChild("sign", { static: false }) myModal: any;
+  @ViewChild("sign", { static: false }) signModal: any;
   signInformation = {};
 
   ngOnInit() {
@@ -69,21 +70,27 @@ export class TrafficSignsComponent implements OnInit {
   }
 
   getSign(idTraffic_Signs: number) {
-    this.changeExNum(this.exNum)
     this.trafficSignsService.getSign(idTraffic_Signs, (err, res) => {
       if (err) {
         return console.log(err);
       }
       this.signInformation = res[0];
-      this.openModal(this.myModal);
+      this.openModal(this.signModal);
     });
   }
-
-  changeExNum(newExNumber: number) {
-    if (newExNumber === this.exNum) {
-      this.exNum = 0;
-    } else {
-      this.exNum = newExNumber;
+  changeExample(direction: number) {
+    if (direction === -1) {
+      if (this.exNum === 0) {
+        this.exNum = this.signInformation['Examples'].length - 1
+      } else {
+        this.exNum -= 1
+      }
+    } else if (direction === 1) {
+      if (this.exNum === this.signInformation['Examples'].length - 1) {
+        this.exNum = 0
+      } else {
+        this.exNum += 1
+      }
     }
   }
 }

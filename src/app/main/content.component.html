@@ -8,7 +8,10 @@
         <accordion [isAnimated]="true" [closeOthers]="true">
           <div class="panel card panel-default">
             <div class="panel-heading card-header panel-enabled">
-              <button class="btn btn-link" (click)="getSignType(1)">
+              <button
+                class="btn btn-link"
+                (click)="openContent = 1; getSignType(1)"
+              >
                 Sinais de Perigo
               </button>
             </div>
@@ -18,10 +21,10 @@
     </accordion>
   </div>
   <div class="col-9">
-    <div class="card">
+    <!-- Sign Type -->
+    <div class="card" *ngIf="openContent === 1">
       <div class="card-header">{{ title }}</div>
       <div class="card-body pr-5 pl-5">
-        <!-- Sign Type -->
         <div class="row">
           <div class="col-9"></div>
           <div class="col-3">
@@ -123,7 +126,18 @@
           placeholder="Texto de Colocação"
         ></textarea>
       </div>
-      <input type="file" class="mb-3" />
+      <button
+        class="btn btn-outline-primary mb-3"
+        type="button"
+        (click)="imagePicker.click()"
+      >
+        Escolher Imagem
+      </button>
+      <input type="file" #imagePicker class="invisible" />
+      <img
+        src="{{ this.data.Placement_Image_Route }}"
+        class="w-75 mb-3 rounded"
+      />
       <div class="w-100">
         <button class="btn btn-primary w-100" type="submit">Guardar</button>
       </div>
@@ -150,7 +164,7 @@
         <button
           type="button"
           class="btn btn-success ml-4"
-          (click)="openModal(signInfo, 'modal-lg')"
+          (click)="addSign(); openModal(signInfo, 'modal-md')"
         >
           <fa name="plus" inverse="true"></fa>
           Adicionar
@@ -164,14 +178,25 @@
       <div class="col-4 mb-3" *ngFor="let sign of signs">
         <div class="card">
           <div class="card-body text-center">
-            <img src="{{ sign.Image_Route }}" width="80%" />
-            <button
-              type="button"
-              class="btn btn-outline-primary mt-4"
-              (click)="getSign(sign.idTraffic_Signs)"
-            >
-              {{ sign.Name }}
-            </button>
+            <div style="height: 9rem;">
+              <img src="{{ sign.Image_Route }}" width="80%" />
+            </div>
+            <div class="mt-4">
+              <button
+                type="button"
+                class="btn btn-primary mr-2"
+                (click)="getSign(sign.idTraffic_Signs)"
+              >
+                <fa name="edit" inverse="true"></fa>
+              </button>
+              <button
+                type="button"
+                class="btn btn-danger ml-2"
+                (click)="deleteSign(sign.idTraffic_Signs)"
+              >
+                <fa name="trash" inverse="true"></fa>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -181,7 +206,7 @@
 
 <ng-template #signInfo>
   <div class="modal-header">
-    <h4 class="modal-title pull-left">{{ signInformation.Name }}</h4>
+    <h4 class="modal-title pull-left">{{ signName }}</h4>
     <button
       type="button"
       class="close pull-right"
@@ -193,38 +218,44 @@
   </div>
   <div class="modal-body">
     <div class="row ml-2 mr-2">
-      <div class="container">
-        <p>
-          <b>Nome:</b>
-          {{ signInformation.Name }}
-        </p>
-        <p>
-          <b>Texto:</b>
-          {{ signInformation.Text }}
-        </p>
-        <p>
-          <b>Imagem:</b>
-        </p>
-        <img src="{{ signInformation.Image_Route }}" />
-      </div>
-    </div>
-  </div>
-  <div class="row mb-4">
-    <hr>
-    <div class="col-6"></div>
-    <div class="col-6">
-      <button
-        type="button"
-        class="btn btn-primary mr-1"
-        (click)="openModal(template)"
-      >
-        <fa name="edit" inverse="true"></fa>
-        Editar
-      </button>
-      <button class="btn btn-danger ml-1" (click)="deleteSign()">
-        <fa name="trash" inverse="true"></fa>
-        Eliminar
-      </button>
+      <form [formGroup]="signForm" (submit)="signF(this.signForm.value)">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Nome</span>
+          </div>
+          <input
+            formControlName="Name"
+            type="text"
+            class="form-control"
+            placeholder="Nome do Sinal"
+          />
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Texto</span>
+          </div>
+          <textarea
+            formControlName="Text"
+            class="form-control"
+            placeholder="Texto"
+          ></textarea>
+        </div>
+        <button
+          class="btn btn-outline-primary mb-3"
+          type="button"
+          (click)="signImagePicker.click()"
+        >
+          Escolher Imagem
+        </button>
+        <input type="file" #signImagePicker class="invisible" />
+        <img
+          src="{{ this.signInformation.Image_Route }}"
+          class="w-25 mb-3 rounded"
+        />
+        <div class="w-100">
+          <button class="btn btn-primary w-100" type="submit" (click)="modalRef.hide()">Guardar</button>
+        </div>
+      </form>
     </div>
   </div>
 </ng-template>
