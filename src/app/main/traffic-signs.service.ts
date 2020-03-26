@@ -39,6 +39,10 @@ export class TrafficSignsService {
         err => cb(err)
       );
   }
+  
+  getSignTypes() {
+    return this.http.get(environment.apiUrl + "/content/traffic-signs", {headers: this.headers})
+  }
 
   getSignsImage(idSignalType: number, cb) {
     this.http
@@ -106,6 +110,10 @@ export class TrafficSignsService {
         res => console.log(res),
         err => console.log(err)
       );
+  }
+  
+  postSignType(form) {
+    return this.http.post(environment.apiUrl + "/content/traffic-signs?type=true", form, {headers: this.headers})
   }
 
   deleteTrafficSign(idTraffic_Signs: number, cb) {
