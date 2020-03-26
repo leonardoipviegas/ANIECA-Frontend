@@ -2,7 +2,7 @@ import { Component, OnInit, TemplateRef, ViewChild } from "@angular/core";
 import { AuthService } from "./../auth/auth.service";
 import { TrafficSignsService } from "./traffic-signs.service";
 import { BsModalService, BsModalRef } from "ngx-bootstrap";
-import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { FormGroup, FormControl, Validators, FormBuilder } from "@angular/forms";
 
 @Component({
   selector: "app-content",
@@ -12,12 +12,15 @@ import { FormGroup, FormControl, Validators } from "@angular/forms";
 export class ContentComponent implements OnInit {
   constructor(
     private trafficSignsService: TrafficSignsService,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private fb: FormBuilder
   ) {}
   title = "";
   data = {};
   modalRef: BsModalRef;
   editSignTypeForm: FormGroup;
+  addSignTypeForm: FormGroup
+  signTypes: any[] = []
   signs = [];
   signInformation = [];
   openContent = 0;
@@ -42,11 +45,31 @@ export class ContentComponent implements OnInit {
       Text: new FormControl(null),
       Placement_Text: new FormControl(null)
     });
+    this.addSignTypeForm = this.fb.group({
+      Name: [null, Validators.required],
+      Text: [null],
+      Placement_Text: [null],
+      Placement_Image_Route: [null]
+    })
     this.signForm = new FormGroup({
       Name: new FormControl(null),
       Text: new FormControl(null),
       Placement_Text: new FormControl(null)
     });
+    this.getSignTypes()
+  }
+  
+  addSignType(form) {
+    console.log(form)
+    this.trafficSignsService.postSignType(form).subscribe(res => {
+      if (res) {
+        console.log(res)
+      }
+      else {
+        console.log('erro')
+      }
+    },
+    error => console.log(error))
   }
 
   getSignType(signId: number) {
@@ -58,6 +81,18 @@ export class ContentComponent implements OnInit {
       this.data = res;
       this.title = res.Name;
     });
+  }
+  
+  getSignTypes() {
+    this.trafficSignsService.getSignTypes().subscribe(res => {
+      if (res) {
+        console.log(res)
+        this.signTypes = Object.values(res)
+      }
+      else {
+        console.log('aqui')
+      }
+    })
   }
 
   openModal(template: TemplateRef<any>, size) {
