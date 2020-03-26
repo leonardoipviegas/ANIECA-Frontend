@@ -3,17 +3,13 @@
 </div>
 <div class="row mt-3 mb-5">
   <div class="col-3">
+    <button type="button" class="btn btn-dark btn-sm" (click)="openModal(AddSignType)"><fa name="plus"></fa> Adicionar</button><br><br>
     <accordion [isAnimated]="true" [closeOthers]="true">
       <accordion-group #sinalization heading="Sinalização">
         <accordion [isAnimated]="true" [closeOthers]="true">
           <div class="panel card panel-default">
-            <div class="panel-heading card-header panel-enabled">
-              <button
-                class="btn btn-link"
-                (click)="openContent = 1; getSignType(1)"
-              >
-                Sinais de Perigo
-              </button>
+            <div *ngFor="let type of signTypes" class="panel-heading card-header panel-enabled">
+              <button class="btn btn-link" (click)="getSignType(type.idTraffic_Signs_Type)">{{ type.Name }}</button>
             </div>
           </div>
         </accordion>
@@ -257,5 +253,56 @@
         </div>
       </form>
     </div>
+  </div>
+</ng-template>
+
+<ng-template #AddSignType let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Adicionar Tipo de Sinal</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modalRef.hide();">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form
+      [formGroup]="addSignTypeForm"
+      (submit)="addSignType(addSignTypeForm.value)"
+    >
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">Nome</span>
+        </div>
+        <input
+          formControlName="Name"
+          type="text"
+          class="form-control"
+          placeholder="Nome do Tipo de Sinal"
+        />
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Texto</span>
+        </div>
+        <textarea
+          formControlName="Text"
+          class="form-control"
+          placeholder="Texto"
+        ></textarea>
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Texto de Colocação</span>
+        </div>
+        <textarea
+          formControlName="Placement_Text"
+          class="form-control"
+          placeholder="Texto de Colocação"
+        ></textarea>
+      </div>
+      <input type="file" formControlName="Placement_Image_Route" class="mb-3" />
+      <div class="w-100">
+        <button class="btn btn-primary w-100" type="submit">Guardar</button>
+      </div>
+    </form>
   </div>
 </ng-template>
