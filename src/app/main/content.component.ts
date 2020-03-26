@@ -80,6 +80,7 @@ export class ContentComponent implements OnInit {
 
       this.data = res;
       this.title = res.Name;
+      this.openContent = 1
     });
   }
   
