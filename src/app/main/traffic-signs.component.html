@@ -194,9 +194,9 @@
               (click)="changeExample(-1)"
               class="ml-5 inv"
               [ngClass]="{
-                'c-p': this.exNum.length !== 1,
-                'text-dark': this.exNum.length !== 1,
-                'text-muted': this.exNum.length === 1
+                'c-p': this.signInformation['Examples'].length !== 1,
+                'text-dark': this.signInformation['Examples'].length !== 1,
+                'text-muted': this.signInformation['Examples'].length === 1
               }"
               ><fa name="play-circle" rotate="horizontal" size="3x"></fa
             ></a>
@@ -206,9 +206,9 @@
               (click)="changeExample(1)"
               class="float-right mr-5 inv"
               [ngClass]="{
-                'c-p': this.exNum.length !== 1,
-                'text-dark': this.exNum.length !== 1,
-                'text-muted': this.exNum.length === 1
+                'c-p':this.signInformation['Examples'].length !== 1,
+                'text-dark': this.signInformation['Examples'].length !== 1,
+                'text-muted': this.signInformation['Examples'].length === 1
               }"
               ><fa name="play-circle" size="3x"></fa
             ></a>
@@ -221,11 +221,9 @@
         <div class="row mb-3">
           <button
             type="button"
-            class="btn"
-            [ngClass]="{
-              'btn-secondary': showExamples,
-              'btn-outline-secondary': !showExamples
-            }"
+            class="btn btn-outline-secondary"
+            [disabled]="!this.signInformation['Examples']"
+            [ngClass]="{'text': !this.signInformation['Examples'] }"
             (click)="showExamples = !showExamples"
           >
             Exemplos

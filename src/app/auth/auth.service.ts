@@ -36,6 +36,7 @@ export class AuthService {
     const expiresIn = authInformation.expirationDate.getTime() - now.getTime();
     if (expiresIn > 0) {
       this.token = authInformation.token;
+      console.log(this.token)
       this.isAunthenticated = true;
       this.setAuthTimer(expiresIn / 1000);
       this.idAccount = authInformation.idAccount;

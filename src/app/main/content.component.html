@@ -164,7 +164,7 @@
         <button
           type="button"
           class="btn btn-success ml-4"
-          (click)="addSign(); openModal(signInfo, 'modal-md')"
+          (click)="addSign(); openModal2(signInfo, 'modal-md')"
         >
           <fa name="plus" inverse="true"></fa>
           Adicionar
@@ -185,7 +185,7 @@
               <button
                 type="button"
                 class="btn btn-primary mr-2"
-                (click)="getSign(sign.idTraffic_Signs)"
+                (click)="getSign(sign.idTraffic_Signs, false)"
               >
                 <fa name="edit" inverse="true"></fa>
               </button>
@@ -211,7 +211,7 @@
       type="button"
       class="close pull-right"
       aria-label="Close"
-      (click)="modalRef.hide()"
+      (click)="modalRef2.hide()"
     >
       <span aria-hidden="true">&times;</span>
     </button>
@@ -252,8 +252,56 @@
           src="{{ this.signInformation.Image_Route }}"
           class="w-25 mb-3 rounded"
         />
+        <div class="card mt-2 mb-3">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-6">
+                <h5 class="mb-2">Exemplos</h5>
+              </div>
+              <div class="col-6">
+                <button
+                  type="button"
+                  class="btn btn-sm btn-success ml-4 mb-2 float-right"
+                  (click)="signsExamplesPicker.click()"
+                >
+                  <fa name="plus" inverse="true"></fa>
+                  Adicionar
+                </button>
+                <input type="file" #signsExamplesPicker class="invisible" />
+              </div>
+            </div>
+            <div class="mb-3" *ngFor="let example of examples">
+              <div class="card">
+                <div class="card-body text-center">
+                  <div style="height: 8rem;">
+                    <img
+                      class="rounded"
+                      src="{{ example.Example_Image_Route }}"
+                      height="100%"
+                    />
+                  </div>
+                  <div class="mt-4">
+                    <button
+                      type="button"
+                      class="btn btn-danger ml-2"
+                      (click)="deleteExample(example.idTraffic_Signs_Examples)"
+                    >
+                      <fa name="trash" inverse="true"></fa>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="w-100">
-          <button class="btn btn-primary w-100" type="submit" (click)="modalRef.hide()">Guardar</button>
+          <button
+            class="btn btn-primary w-100"
+            type="submit"
+            (click)="modalRef2.hide()"
+          >
+            Guardar
+          </button>
         </div>
       </form>
     </div>

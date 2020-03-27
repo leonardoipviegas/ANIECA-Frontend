@@ -70,6 +70,8 @@ export class TrafficSignsComponent implements OnInit {
   }
 
   getSign(idTraffic_Signs: number) {
+    this.exNum = 0;
+    this.showExamples = false;
     this.trafficSignsService.getSign(idTraffic_Signs, (err, res) => {
       if (err) {
         return console.log(err);

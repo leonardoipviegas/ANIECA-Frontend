@@ -41,3 +41,6 @@ body {
 .text-center img {
   height: 15em;
 }
+.text {
+  cursor: text;
+}

@@ -121,4 +121,18 @@ export class TrafficSignsService {
         err => cb(err)
       );
   }
+
+  deleteExample(idTraffic_Signs_Examples: number, cb) {
+    this.http
+    .delete(
+      environment.apiUrl +
+        "/content/traffic-signs/sign/examples/?idTraffic_Signs_Examples=" +
+        idTraffic_Signs_Examples,
+      { headers: this.headers }
+    )
+    .subscribe(
+      res => cb(null, res),
+      err => cb(err)
+    );
+  }
 }

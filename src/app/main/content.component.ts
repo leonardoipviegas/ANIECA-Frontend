@@ -17,16 +17,20 @@ export class ContentComponent implements OnInit {
   title = "";
   data = {};
   modalRef: BsModalRef;
+  modalRef2: BsModalRef;
   editSignTypeForm: FormGroup;
   signs = [];
   signInformation = [];
   openContent = 0;
   signForm: FormGroup;
   signName: string;
+  exampleChanges = [];
+  examples = [];
   @ViewChild("signInfo", { static: false }) signInfo: any;
 
   onImagePicked(event: Event) {
     const file = (event.target as HTMLInputElement).files[0];
+    console.log(file)
     // this.form.patchValue({image: file});
     // this.form.get('image').updateValueAndValidity();
     // const reader = new FileReader();
@@ -44,8 +48,7 @@ export class ContentComponent implements OnInit {
     });
     this.signForm = new FormGroup({
       Name: new FormControl(null),
-      Text: new FormControl(null),
-      Placement_Text: new FormControl(null)
+      Text: new FormControl(null)
     });
   }
 
@@ -62,6 +65,9 @@ export class ContentComponent implements OnInit {
 
   openModal(template: TemplateRef<any>, size) {
     this.modalRef = this.modalService.show(template, { class: size });
+  }
+  openModal2(template: TemplateRef<any>, size) {
+    this.modalRef2 = this.modalService.show(template, { class: size });
   }
 
   editSignTypeF(data) {
@@ -83,23 +89,43 @@ export class ContentComponent implements OnInit {
     var SignFields = ["Name", "Text"];
 
     if (this.signInformation.length === 0) {
-      data['Traffic_Signs_Type_idTraffic_Signs_Type'] = this.data["idTraffic_Signs_Type"]
-      this.trafficSignsService.postSign(data, (error) => {
+      data["Traffic_Signs_Type_idTraffic_Signs_Type"] = this.data[
+        "idTraffic_Signs_Type"
+      ];
+      this.trafficSignsService.postSign(data, error => {
         if (error) {
-          return console.log(error)
+          return console.log(error);
         }
         this.getSigns(this.data["idTraffic_Signs_Type"]);
       });
     } else {
+
       SignFields.forEach(SignField => {
         if (this.signInformation[SignField] === data[SignField])
           delete data[SignField];
       });
 
-      this.trafficSignsService.patchSign(
-        this.signInformation["idTraffic_Signs"],
-        data
-      );
+      if (Object.keys(data).length !== 0) {
+        this.trafficSignsService.patchSign(
+          this.signInformation["idTraffic_Signs"],
+          data
+        );
+      }
+    }
+
+    if (this.exampleChanges.length !== 0) {
+      this.exampleChanges.forEach(exampleChange => {
+        if (exampleChange['delete'] === true) {
+          this.trafficSignsService.deleteExample(
+            exampleChange['idTraffic_Signs_Examples'],
+            error => {
+              if (error) {
+                return console.log(error);
+              }
+            }
+          );
+        }
+      });
     }
   }
 
@@ -118,7 +144,7 @@ export class ContentComponent implements OnInit {
     });
   }
 
-  getSign(idTraffic_Signs: number) {
+  getSign(idTraffic_Signs: number, op) {
     this.trafficSignsService.getSign(idTraffic_Signs, (err, res) => {
       if (err) {
         return console.log(err);
@@ -127,17 +153,36 @@ export class ContentComponent implements OnInit {
       this.signForm.controls["Name"].setValue(this.signInformation["Name"]);
       this.signForm.controls["Text"].setValue(this.signInformation["Text"]);
       this.signName = this.signInformation["Name"];
-      this.openModal(this.signInfo, "modal-md");
+      this.examples = this.signInformation['Examples']
+      if (!op) {
+        this.openModal2(this.signInfo, "modal-md");
+      }
     });
   }
 
   deleteSign(idTraffic_Signs: number) {
-    this.trafficSignsService.deleteTrafficSign(idTraffic_Signs, (error) => {
+    this.trafficSignsService.deleteTrafficSign(idTraffic_Signs, error => {
       if (error) {
-        return console.log(error)
+        return console.log(error);
       }
 
       this.getSigns(this.data["idTraffic_Signs_Type"]);
     });
+  }
+
+  deleteExample(idTraffic_Signs_Examples: number) {
+    this.exampleChanges.push({
+      delete: true,
+      idTraffic_Signs_Examples
+    });
+
+    var i = 0;
+
+    this.examples.forEach(example => {
+      if (example['idTraffic_Signs_Examples'] === idTraffic_Signs_Examples) {
+        this.examples.splice(i, 1)
+      }
+      i++;
+    })
   }
 }
