@@ -3,6 +3,7 @@ import { AuthService } from "./../auth/auth.service";
 import { TrafficSignsService } from "./traffic-signs.service";
 import { BsModalService, BsModalRef } from "ngx-bootstrap";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { ContentService } from './content.service';
 
 @Component({
   selector: "app-content",
@@ -12,7 +13,8 @@ import { FormGroup, FormControl, Validators } from "@angular/forms";
 export class ContentComponent implements OnInit {
   constructor(
     private trafficSignsService: TrafficSignsService,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private contentService: ContentService
   ) {}
   title = "";
   data = {};
@@ -29,15 +31,12 @@ export class ContentComponent implements OnInit {
   @ViewChild("signInfo", { static: false }) signInfo: any;
 
   onImagePicked(event: Event) {
-    const file = (event.target as HTMLInputElement).files[0];
-    console.log(file)
-    // this.form.patchValue({image: file});
-    // this.form.get('image').updateValueAndValidity();
-    // const reader = new FileReader();
-    // reader.onload = () => {
-    //   this.imagePreview = reader.result as string;
-    // };
-    // reader.readAsDataURL(file as Blob);
+    console.log(event)
+    const file = <File>(event.target as HTMLInputElement).files[0];
+
+    this.contentService.addImage(file, res => {
+      console.log(res)
+    })
   }
 
   ngOnInit() {

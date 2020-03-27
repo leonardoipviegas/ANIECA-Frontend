@@ -133,7 +133,7 @@
       >
         Escolher Imagem
       </button>
-      <input type="file" #imagePicker class="invisible" />
+      <input type="file" #imagePicker class="invisible" (change)="onImagePicked($event)" />
       <img
         src="{{ this.data.Placement_Image_Route }}"
         class="w-75 mb-3 rounded"
